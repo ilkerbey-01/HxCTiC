@@ -1,2 +1,20 @@
-# materials-science
-Add new and unique materials to TiCon
+# HxCTiC
+ - Ore dictionary metal detection
+	- Hardness from ore ~= Material hardness
+	- Mining level from ore ~= mining level
+	- Color from ingot detection for material color
+	- Molten metal color RGB if possible? Or just closest material color/red
+	- Drawspeed for bow based on hardness
+	- Material Traits configurable + defaults from github
+ - Bowstring Materials
+	- More of them
+	- Rubber
+	- Sinew
+	- Hempstring (IE, etc..)
+	- Parachord (custom)
+	- Nylon (synthetic material HxCTech)
+	- Linen
+	- Leather
+	- Kevlar? (synthetic material HxCTech)
+	- Carbon Fibre (ic2)
+ - Completely Configurable
