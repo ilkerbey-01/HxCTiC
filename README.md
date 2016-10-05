@@ -7,14 +7,13 @@
 	- Drawspeed for bow based on hardness
 	- Material Traits configurable + defaults from github
  - Bowstring Materials
-	- More of them
-	- Rubber
-	- Sinew
-	- Hempstring (IE, etc..)
+	- Rubber (OreDict'd)
+	- Sinew (20% chance to drop from sheep)
+	- Hempstring (IE or custom)
 	- Parachord (custom)
-	- Nylon (synthetic material HxCTech)
+	- Nylon 6,6 (synthetic material HxCTech) (Untill tech mod is finished use spider string in smeltery)
 	- Linen
 	- Leather
 	- Kevlar? (synthetic material HxCTech)
-	- Carbon Fibre (ic2)
+	- Carbon Fibre Strings (ic2)
  - Completely Configurable
