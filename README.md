@@ -1,19 +1,18 @@
 # HxCTiC
- - Ore dictionary metal detection
+ - Changes to base TiCon mechanics
 	- Hardness from ore ~= Material hardness
 	- Mining level from ore ~= mining level
 	- Color from ingot detection for material color
 	- Molten metal color RGB if possible? Or just closest material color/red
 	- Drawspeed for bow based on hardness
-	- Material Traits configurable + defaults from github
+	- Material Traits configurable + have default file hosted on github? 
  - Bowstring Materials
 	- Rubber (OreDict'd)
 	- Sinew (20% chance to drop from sheep)
-	- Hempstring (IE or custom)
+	- Hemp (IE or custom)
 	- Parachord (custom)
 	- Nylon 6,6 (synthetic material HxCTech) (Untill tech mod is finished use spider string in smeltery)
 	- Linen
 	- Leather
 	- Kevlar? (synthetic material HxCTech)
-	- Carbon Fibre Strings (ic2)
- - Completely Configurable
+	- Carbon String (IC2)
