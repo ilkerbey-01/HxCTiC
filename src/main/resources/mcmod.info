@@ -1,0 +1,15 @@
+[
+  {
+    "modid": "HxCTiC",
+    "name": "HxC TiC",
+    "description": "More TiC materials",
+    "version": "1.0.0",
+    "credits": "HxCKDMS",
+	"logoFile": "assets/hxcenchants/textures/HxCEnchants.jpg",
+    "mcversion": "1.7.10",
+    "authors": ["§4HxCK§3D§eM§0S§r"],
+    "dependencies": [
+           "mod_HxCCore"
+    ]
+  }
+]
