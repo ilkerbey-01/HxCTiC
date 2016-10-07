@@ -6,33 +6,36 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.BlockFluidClassic;
+import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
 
-public class LeFluid extends BlockFluidClassic {
-
+public class LeFluid extends BlockFluidBase {
     @SideOnly(Side.CLIENT)
     protected IIcon stillIcon;
     @SideOnly(Side.CLIENT)
     protected IIcon flowingIcon;
-    private int color;
-    public LeFluid(Fluid fluid, int Color) {
+
+    public int colour = 0xffffffff;
+
+    @Override
+    public int getRenderType() {
+        return Reference.BLOCK_RENDER_ID;
+    }
+
+    public LeFluid(Fluid fluid, int color) {
         super(fluid, Material.lava);
         setCreativeTab(CreativeTabs.tabMisc);
-        color = Color;
+        colour = color;
     }
 
     @Override
     public IIcon getIcon(int side, int meta) {
         return (side == 0 || side == 1)? stillIcon : flowingIcon;
-    }
-
-    @Override
-    public int getBlockColor() {
-        return color;
     }
 
     @SideOnly(Side.CLIENT)
@@ -44,14 +47,42 @@ public class LeFluid extends BlockFluidClassic {
 
     @Override
     public boolean canDisplace(IBlockAccess world, int x, int y, int z) {
-        if (world.getBlock(x, y, z).getMaterial().isLiquid()) return false;
-        return super.canDisplace(world, x, y, z);
+        return !world.getBlock(x, y, z).getMaterial().isLiquid() && super.canDisplace(world, x, y, z);
     }
 
     @Override
     public boolean displaceIfPossible(World world, int x, int y, int z) {
-        if (world.getBlock(x, y, z).getMaterial().isLiquid()) return false;
-        return super.displaceIfPossible(world, x, y, z);
+        return !world.getBlock(x, y, z).getMaterial().isLiquid() && super.displaceIfPossible(world, x, y, z);
     }
 
+    @Override
+    public int getQuantaValue(IBlockAccess world, int x, int y, int z) {
+        if (world.getBlock(x, y, z) == Blocks.air)
+            return 0;
+
+        if (world.getBlock(x, y, z) != this)
+            return -1;
+
+        return quantaPerBlock - world.getBlockMetadata(x, y, z);
+    }
+
+    @Override
+    public boolean canCollideCheck(int meta, boolean fullHit) {
+        return false;
+    }
+
+    @Override
+    public int getMaxRenderHeightMeta() {
+        return 0;
+    }
+
+    @Override
+    public FluidStack drain(World world, int x, int y, int z, boolean doDrain) {
+        return null;
+    }
+
+    @Override
+    public boolean canDrain(World world, int x, int y, int z) {
+        return false;
+    }
 }

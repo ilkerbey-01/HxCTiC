@@ -21,7 +21,6 @@ public class Registry {
     public static void init () {
         fluids.forEach((name, fluid) -> {
             FluidRegistry.registerFluid(fluid);
-            System.out.println(StringUtils.capitalize(name.substring(6)));
             Block lef = new LeFluid(fluid, Configurations.materials.get(StringUtils.capitalize(name.substring(6))).Colour).setBlockName(name);
             leFluids.putIfAbsent(name, lef);
             GameRegistry.registerBlock(lef, Reference.MOD_ID + "_fluid_" + name);
