@@ -1,6 +1,7 @@
 package HxCKDMS.HxCTiC;
 
 import HxCKDMS.HxCTiC.lib.Reference;
+import HxCKDMS.HxCTiC.lib.Registry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
@@ -14,11 +15,13 @@ import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
+import java.util.Random;
+
 public class LeFluid extends BlockFluidBase {
     @SideOnly(Side.CLIENT)
-    protected IIcon stillIcon;
+    private IIcon stillIcon;
     @SideOnly(Side.CLIENT)
-    protected IIcon flowingIcon;
+    private IIcon flowingIcon;
 
     public int colour = 0xffffffff;
 
@@ -68,21 +71,26 @@ public class LeFluid extends BlockFluidBase {
 
     @Override
     public boolean canCollideCheck(int meta, boolean fullHit) {
-        return false;
+        return fullHit && meta == quantaPerBlock - 1;
     }
 
     @Override
     public int getMaxRenderHeightMeta() {
-        return 0;
+        return quantaPerBlock - 1;
+    }
+
+    @Override
+    public void updateTick(World world, int x, int y, int z, Random rand) {
+        super.updateTick(world, x, y, z, rand);
     }
 
     @Override
     public FluidStack drain(World world, int x, int y, int z, boolean doDrain) {
-        return null;
+        return doDrain ? new FluidStack(Registry.fluids.get(getUnlocalizedName().substring(5)), 1000) : null;
     }
 
     @Override
     public boolean canDrain(World world, int x, int y, int z) {
-        return false;
+        return true;
     }
 }

@@ -20,6 +20,9 @@ public class Registry {
 
     public static void init () {
         fluids.forEach((name, fluid) -> {
+            fluid.setTemperature(400);
+            fluid.setViscosity(4);
+            fluid.setDensity(3);
             FluidRegistry.registerFluid(fluid);
             Block lef = new LeFluid(fluid, Configurations.materials.get(StringUtils.capitalize(name.substring(6))).Colour).setBlockName(name);
             leFluids.putIfAbsent(name, lef);
