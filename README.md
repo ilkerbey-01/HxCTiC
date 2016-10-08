@@ -16,3 +16,6 @@
 	- Leather
 	- Kevlar? (synthetic material HxCTech)
 	- Woven carbon fiber string (IC2)
+ - New alloying 
+       - Fayalite - extremely sharp material with low durablity - made by melting iron and nether quartz in a 2:1 ratio 
+       - Spinel - durable material with a moderatly good mining level - made from bone meal, aluminium and water heated to a high tempature 
