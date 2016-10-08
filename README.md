@@ -10,10 +10,10 @@
 	- Rubber (OreDict'd)
 	- Sinew (20% chance to drop from sheep)
 	- Hemp (IE or custom)
-	- Parachord (custom)
+	- Parachord (nylon poured over hemp string)
 	- Nylon 6,6 (synthetic material HxCTech) (Untill tech mod is finished use spider string in smeltery)
 	- Linen (make from reeds???)
-	- Leather
+	- Leather (stamping table)
 	- Kevlar? (synthetic material HxCTech)
 	- Woven carbon fiber string (IC2)
  - New alloying 
