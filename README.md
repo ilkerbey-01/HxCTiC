@@ -10,9 +10,14 @@
 	- Rubber (OreDict'd)
 	- Sinew (20% chance to drop from sheep)
 	- Hemp (IE or custom)
-	- Parachord (custom)
+	- Parachord (nylon poured over hemp string)
 	- Nylon 6,6 (synthetic material HxCTech) (Untill tech mod is finished use spider string in smeltery)
 	- Linen (make from reeds???)
-	- Leather
+	- Leather (stamping table)
 	- Kevlar? (synthetic material HxCTech)
 	- Woven carbon fiber string (IC2)
+ - New alloying 
+       - Fayalite - extremely sharp material with low durablity - made by melting iron and nether quartz in a 2:1 ratio 
+           - Has Jaggy Trait
+       - Spinel - durable material with a moderatly good mining level - made from bone meal, aluminium and water heated to a high tempature 
+	   - has Stonebound Trait
