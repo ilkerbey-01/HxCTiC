@@ -7,6 +7,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
+import tconstruct.library.TConstructRegistry;
+import tconstruct.weaponry.TinkerWeaponry;
 
 @SuppressWarnings("WeakerAccess")
 public class HxCMaterial {
@@ -24,7 +26,7 @@ public class HxCMaterial {
     public String OreDictionaryItem;
     public int RequiredAmountOfMaterial;
     public boolean StampedMaterial = false;
-    public int stringDataA, stringDataB, stringDataC;
+    public float durabilityModBow, drawSpeedMod, flightSpeedMod;
 
     public HxCMaterial () {}
 
@@ -71,7 +73,7 @@ public class HxCMaterial {
         StampedMaterial = Stamped;
     }
 
-    public HxCMaterial (int id, String name, int durability, int miningSpeed, int miningLevel, int attack, float durabilityMod, float projSpeed, int drawSpeed, float mass, float fragility, String style, int color, String oreDict, int amount, boolean Stamped, int reinforcement, int stonebound, int jaggy, int stringA, int stringB, int stringC) {
+    public HxCMaterial (int id, String name, int durability, int miningSpeed, int miningLevel, int attack, float durabilityMod, float projSpeed, int drawSpeed, float mass, float fragility, String style, int color, String oreDict, int amount, boolean Stamped, int reinforcement, int stonebound, int jaggy, float bowDurabilityModifier, float bowDrawSpeedModifier, float bowFlightSpeedModifier) {
         MaterialID = id;
         MaterialName = name;
         LocalizationString = "material.hxctic." + name.toLowerCase();
@@ -92,9 +94,9 @@ public class HxCMaterial {
         OreDictionaryItem = oreDict;
         RequiredAmountOfMaterial = amount;
         StampedMaterial = Stamped;
-        stringDataA = stringA;
-        stringDataB = stringB;
-        stringDataC = stringC;
+        durabilityModBow = bowDurabilityModifier;
+        drawSpeedMod = bowDrawSpeedModifier;
+        flightSpeedMod = bowFlightSpeedModifier;
     }
 
     public void init() {
@@ -157,5 +159,9 @@ public class HxCMaterial {
             tag.setInteger("MaterialId", MaterialID);
             FMLInterModComms.sendMessage("TConstruct", "addPartCastingMaterial", tag);
         }
+//FOR FUCKS SAKE TINKERS I HOPE YOU GET THIS SHIT FIXED IN 1.10
+//Registering Bowstring Materials is a giant hassle that requires reflections everywhere...
+        if (durabilityModBow != 0)
+            TConstructRegistry.addBowstringMaterial(this.MaterialID, 2, new ItemStack(OreDictionary.getOres(OreDictionaryItem).get(0).getItem()), new ItemStack(TinkerWeaponry.bowstring, 1, 3), durabilityModBow, drawSpeedMod, flightSpeedMod, Colour);
     }
 }

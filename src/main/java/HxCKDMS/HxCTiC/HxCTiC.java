@@ -26,6 +26,31 @@ public class HxCTiC {
         SpecialHandlers.registerSpecialClass(HxCMaterial.class);
         hxCConfig = new HxCConfig(Configurations.class, "HxCTiC", HxCCore.HxCConfigDir, "cfg", MOD_ID);
         hxCConfig.initConfiguration();
+/*
+        String[] a = new String[4];
+        String[] b = new String[4];*/
+        /*String[] c = new String[]{
+                "ingot", "rod", "pickaxe", "shovel", "axe", "swordblade", "largeguard", "mediumguard", "crossbar",
+                "binding", "frypan", "sign", "knifeblade", "chisel", "largerod", "toughbinding", "largeplate",
+                "broadaxe", "scythe", "excavator", "largeblade", "hammerhead", "fullguard", "bowstring",
+                "fletching", "arrowhead", "gem", "nugget"
+        };*/
+       /* {
+            a[0] = "string";
+            a[1] = "enchantedfabric";
+            a[2] = "flamestring";
+            a[3] = "potatostring";
+
+            b[0] = "string";
+            b[1] = "magicfabric";
+            b[2] = "flamestring";
+            b[3] = "potatostring";
+        }*/
+
+        /*HxCReflectionHandler.setPrivateFinalValue(Bowstring.class, null, a, "toolMaterialNames", "toolMaterialNames");
+        HxCReflectionHandler.setPrivateFinalValue(Bowstring.class, null, b, "toolTextureNames", "toolTextureNames");*/
+        /*HxCReflectionHandler.setPrivateFinalValue(MetalPattern.class, null, c, "patternName", "patternName");*/
+
         Registry.preinit();
     }
 
