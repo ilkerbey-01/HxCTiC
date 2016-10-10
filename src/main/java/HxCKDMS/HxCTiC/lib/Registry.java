@@ -1,6 +1,6 @@
 package HxCKDMS.HxCTiC.lib;
 
-import HxCKDMS.HxCTiC.LeFluid;
+import HxCKDMS.HxCTiC.RGBFluid;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraftforge.fluids.Fluid;
@@ -24,7 +24,7 @@ public class Registry {
             fluid.setViscosity(4);
             fluid.setDensity(3);
             FluidRegistry.registerFluid(fluid);
-            Block lef = new LeFluid(fluid, Configurations.materials.get(StringUtils.capitalize(name.substring(6))).Colour).setBlockName(name);
+            Block lef = new RGBFluid(fluid, Configurations.materials.get(StringUtils.capitalize(name.substring(6))).Colour).setBlockName(name);
             leFluids.putIfAbsent(name, lef);
             GameRegistry.registerBlock(lef, Reference.MOD_ID + "_fluid_" + name);
             fluid.setUnlocalizedName(lef.getUnlocalizedName());

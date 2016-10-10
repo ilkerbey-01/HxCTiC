@@ -11,13 +11,14 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.BlockFluidBase;
+import net.minecraftforge.fluids.BlockFluidFinite;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Random;
 
-public class LeFluid extends BlockFluidBase {
+@SuppressWarnings("all")
+public class RGBFluid extends BlockFluidFinite {
     @SideOnly(Side.CLIENT)
     private IIcon stillIcon;
     @SideOnly(Side.CLIENT)
@@ -26,11 +27,11 @@ public class LeFluid extends BlockFluidBase {
     public int colour = 0xffffffff;
 
     @Override
-    public int getRenderType() {
-        return Reference.BLOCK_RENDER_ID;
+    public int colorMultiplier(IBlockAccess access, int x, int y, int z) {
+        return colour;
     }
 
-    public LeFluid(Fluid fluid, int color) {
+    public RGBFluid(Fluid fluid, int color) {
         super(fluid, Material.lava);
         setCreativeTab(CreativeTabs.tabMisc);
         colour = color;
@@ -76,12 +77,64 @@ public class LeFluid extends BlockFluidBase {
 
     @Override
     public int getMaxRenderHeightMeta() {
-        return quantaPerBlock - 1;
+        return quantaPerBlock + 1;
+    }
+
+    public boolean isValid(World world, int x, int y, int z, int meta) {
+        if (world.getBlock(x + 1, y, z) == this && world.getBlockMetadata(x + 1, y, z) == meta - 1) {
+            return true;
+        }
+        if (world.getBlock(x - 1, y, z) == this && world.getBlockMetadata(x - 1, y, z) == meta - 1) {
+            return true;
+        }
+        if (world.getBlock(x, y, z + 1) == this && world.getBlockMetadata(x, y, z + 1) == meta - 1) {
+            return true;
+        }
+        if (world.getBlock(x, y, z - 1) == this && world.getBlockMetadata(x, y, z - 1) == meta - 1) {
+            return true;
+        }
+        if (world.getBlock(x, y + 1, z) == this) {
+            return true;
+        }
+        return false;
     }
 
     @Override
     public void updateTick(World world, int x, int y, int z, Random rand) {
-        super.updateTick(world, x, y, z, rand);
+        int meta = world.getBlockMetadata(x, y, z);
+
+        if (meta > 8) {
+            world.setBlockToAir(x, y, z);
+        }
+        //fluid evaporation
+        if (meta != 0 && !isValid(world, x, y, z, meta)) {
+            if (meta + 1 >= 8)
+                world.setBlock(x, y, z, Blocks.air, 0, 3);
+            else world.setBlockMetadataWithNotify(x, y, z, meta + 1, 3);
+            return;
+        }
+
+        if (meta != 8 && world.getBlock(x + 1, y, z) == Blocks.air) {
+            world.setBlock(x + 1, y, z, this, meta + 1, 2);
+        }
+
+        if (meta != 8 && world.getBlock(x - 1, y, z) == Blocks.air) {
+            world.setBlock(x - 1, y, z, this, meta + 1, 2);
+        }
+
+        if (meta != 8 && world.getBlock(x, y, z + 1) == Blocks.air) {
+            world.setBlock(x, y, z + 1, this, meta + 1, 2);
+        }
+
+        if (meta != 8 && world.getBlock(x, y, z - 1) == Blocks.air) {
+            world.setBlock(x, y, z - 1, this, meta + 1, 2);
+        }
+
+        if (world.getBlock(x, y - 1, z) == Blocks.air) {
+            world.setBlock(x, y - 1, z, this, meta, 3);
+            if (meta >= 8) world.setBlockToAir(x, y, z);
+            else world.setBlockMetadataWithNotify(x, y, z, meta + 1, 3);
+        }
     }
 
     @Override

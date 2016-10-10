@@ -1,7 +1,5 @@
 package HxCKDMS.HxCTiC.lib;
 
-import HxCKDMS.HxCCore.Configs.Configurations;
-import HxCKDMS.HxCCore.api.Utils.LogHelper;
 import cpw.mods.fml.common.event.FMLInterModComms;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -13,15 +11,10 @@ import net.minecraftforge.oredict.OreDictionary;
 @SuppressWarnings("WeakerAccess")
 public class HxCMaterial {
     public int MaterialID;
-    public String MaterialName = "";
-    public String LocalizationString = "";
-    public int Durability;
-    public int MiningSpeed;
-    public int HarvestLevel;
-    public int AttackDamage;
+    public String MaterialName = "", LocalizationString = "";
+    public int Durability, MiningSpeed, HarvestLevel, AttackDamage;
     public float HandleDurabilityModifier;
-    public int ReinforcementLevel;
-    public int StoneboundLevel;
+    public int ReinforcementLevel, StoneboundLevel, JaggyLevel;
     public float ProjectileSpeed;
     public int BowDrawSpeed;
     public float ProjectileMass;
@@ -31,10 +24,31 @@ public class HxCMaterial {
     public String OreDictionaryItem;
     public int RequiredAmountOfMaterial;
     public boolean StampedMaterial = false;
+    public int stringDataA, stringDataB, stringDataC;
 
     public HxCMaterial () {}
 
-    public HxCMaterial (int id, String name, int durability, int miningSpeed, int miningLevel, int attack, float durabilityMod, int reinforcement, int stonebound, float projSpeed, int drawSpeed, float mass, float fragility, String style, int color, String oreDict, int amount, boolean Stamped) {
+    public HxCMaterial (int id, String name, int durability, int miningSpeed, int miningLevel, int attack, float durabilityMod, float projSpeed, int drawSpeed, float mass, float fragility, String style, int color, String oreDict, int amount, boolean Stamped) {
+        MaterialID = id;
+        MaterialName = name;
+        LocalizationString = "material.hxctic." + name.toLowerCase();
+        Durability = durability;
+        MiningSpeed = miningSpeed;
+        HarvestLevel = miningLevel;
+        AttackDamage = attack;
+        HandleDurabilityModifier = durabilityMod;
+        ProjectileSpeed = projSpeed;
+        BowDrawSpeed = drawSpeed;
+        ProjectileMass = mass;
+        ProjectileFragility = fragility;
+        Style = style;
+        Colour = color;
+        OreDictionaryItem = oreDict;
+        RequiredAmountOfMaterial = amount;
+        StampedMaterial = Stamped;
+    }
+
+    public HxCMaterial (int id, String name, int durability, int miningSpeed, int miningLevel, int attack, float durabilityMod, float projSpeed, int drawSpeed, float mass, float fragility, String style, int color, String oreDict, int amount, boolean Stamped, int reinforcement, int stonebound, int jaggy) {
         MaterialID = id;
         MaterialName = name;
         LocalizationString = "material.hxctic." + name.toLowerCase();
@@ -45,6 +59,7 @@ public class HxCMaterial {
         HandleDurabilityModifier = durabilityMod;
         ReinforcementLevel = reinforcement;
         StoneboundLevel = stonebound;
+        JaggyLevel = jaggy;
         ProjectileSpeed = projSpeed;
         BowDrawSpeed = drawSpeed;
         ProjectileMass = mass;
@@ -54,11 +69,36 @@ public class HxCMaterial {
         OreDictionaryItem = oreDict;
         RequiredAmountOfMaterial = amount;
         StampedMaterial = Stamped;
-        if (Configurations.DebugMode)
-            LogHelper.info(String.format("Registered material : %1$s with traits : ID = %2$s , Name = %3$s , Durability = %4$s , MiningSpeed = %5$s , MiningLevel = %6$s , AttackDamage = %7$s , DurabilityToolModifier = %8$s , ReinforcementLevel = %9$s , StoneboundLevel = %10$s , ProjectileSpeed = %11$s , DrawSpeed = %12$s , Mass = %13$s , Fragility = %14$s", name, id, name, durability, miningSpeed, miningLevel, attack, durabilityMod, reinforcement, stonebound, projSpeed, drawSpeed, mass, fragility), Reference.MOD_ID);
+    }
+
+    public HxCMaterial (int id, String name, int durability, int miningSpeed, int miningLevel, int attack, float durabilityMod, float projSpeed, int drawSpeed, float mass, float fragility, String style, int color, String oreDict, int amount, boolean Stamped, int reinforcement, int stonebound, int jaggy, int stringA, int stringB, int stringC) {
+        MaterialID = id;
+        MaterialName = name;
+        LocalizationString = "material.hxctic." + name.toLowerCase();
+        Durability = durability;
+        MiningSpeed = miningSpeed;
+        HarvestLevel = miningLevel;
+        AttackDamage = attack;
+        HandleDurabilityModifier = durabilityMod;
+        ReinforcementLevel = reinforcement;
+        StoneboundLevel = stonebound;
+        JaggyLevel = jaggy;
+        ProjectileSpeed = projSpeed;
+        BowDrawSpeed = drawSpeed;
+        ProjectileMass = mass;
+        ProjectileFragility = fragility;
+        Style = style;
+        Colour = color;
+        OreDictionaryItem = oreDict;
+        RequiredAmountOfMaterial = amount;
+        StampedMaterial = Stamped;
+        stringDataA = stringA;
+        stringDataB = stringB;
+        stringDataC = stringC;
     }
 
     public void init() {
+        //TODO: Bowstring Material Data
         NBTTagCompound tag = new NBTTagCompound();
         tag.setInteger("Id", MaterialID);
         tag.setString("Name", MaterialName);
@@ -69,7 +109,11 @@ public class HxCMaterial {
         tag.setInteger("Attack", AttackDamage);
         tag.setFloat("HandleModifier", HandleDurabilityModifier);
         tag.setInteger("Reinforced", ReinforcementLevel);
-        tag.setInteger("Stonebound", StoneboundLevel);
+
+        if (JaggyLevel == 0)
+            tag.setInteger("Stonebound", StoneboundLevel);
+        else tag.setInteger("Jagged", JaggyLevel);
+
         if (BowDrawSpeed != 0) {
             tag.setFloat("Bow_ProjectileSpeed", ProjectileSpeed);
             tag.setInteger("Bow_DrawSpeed", BowDrawSpeed);
