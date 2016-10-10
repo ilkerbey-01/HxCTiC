@@ -17,7 +17,5 @@
 	- Kevlar? (synthetic material HxCTech)
 	- Woven carbon fiber string (IC2)
  - New alloying 
-       - Fayalite - extremely sharp material with low durablity - made by melting iron and nether quartz in a 2:1 ratio 
-           - Has Jagged Trait
-       - Spinel - durable material with a moderatly good mining level - made from bone meal, aluminium and water heated to a high tempature 
-	   - has Stonebound Trait
+       - Fayalite - extremely sharp material with low durablity - made by melting iron and nether quartz in a 2:1 ratio (jagged)
+       - Spinel - durable material with a moderatly good mining level - made from bone meal (maybe add mgso4 ore), aluminium and water heated to a high tempature (Stonebound)
