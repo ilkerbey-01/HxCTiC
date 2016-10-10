@@ -12,7 +12,7 @@
 	- Hemp (IE or custom)
 	- Parachord (nylon poured over hemp string)
 	- Nylon 6,6 (synthetic material HxCTech) (Untill tech mod is finished use spider string in smeltery)
-	- Linen (make from reeds???)
+	- Linen (stamp reeds)
 	- Leather (stamping table)
 	- Kevlar? (synthetic material HxCTech)
 	- Woven carbon fiber string (IC2)
